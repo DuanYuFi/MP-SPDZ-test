@@ -40,6 +40,8 @@ public:
 
     Beaver(Player& P) : prep(0), MC(0), P(P) {}
 
+    Preprocessing<T>* get_prep() { return prep; }
+
     typename T::Protocol branch();
 
     void init(Preprocessing<T>& prep, typename T::MAC_Check& MC);
