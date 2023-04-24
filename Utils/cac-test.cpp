@@ -71,7 +71,7 @@ void run(char** argv)
     Timer timer;
     timer.start();
 
-    int n = 200000;
+    int n = atoi(argv[2]);
     vector<array<T, 3>> triples(n);
 
     for (int i = 0; i < n; i ++) {
@@ -79,9 +79,15 @@ void run(char** argv)
     }
 
     timer.stop();
+    
+    size_t total_comm = 0;
+    auto comm = P.total_comm();
 
-    cout << triples[0][0] << " " << triples[0][1] << " " << triples[0][2] << endl;
+    for (auto each: comm) {
+        total_comm += each.second.data;
+    }
 
     cout << "Time for " << n << " triples: " << timer.elapsed() << endl;
+    cout << "Comm of me is " << total_comm / (double) (1024 * 1024) << endl;
     
 }
