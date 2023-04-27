@@ -71,9 +71,9 @@ inline uint64_t Mersenne::sub(uint64_t a, uint64_t b) {
 }
 
 inline uint64_t Mersenne::mul(uint64_t a, uint64_t b) {
-    int128 res = _mm_clmulepi64_si128((uint128_t) a, (uint128_t) b, 0);
-    uint64_t higher = res.get_lower();
-    uint64_t lower = res.get_upper();
+    uint128_t res = ((uint128_t) a) * ((uint128_t) b);
+    uint64_t higher = (res>>PRIME_EXP);
+    uint64_t lower = res & PR;
     return add(higher, lower);
 }
 
