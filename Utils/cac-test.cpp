@@ -49,7 +49,7 @@ template<class T>
 void run(char** argv)
 {
     // run 64-bit computation by default
-    int n_bits = 64;
+    int n_bits = 128;
 
     // set up networking on localhost
     int my_number = atoi(argv[1]);
@@ -58,7 +58,7 @@ void run(char** argv)
     Names N(my_number, n_parties, "localhost", port_base);
     CryptoPlayer P(N);
 
-    OnlineOptions::singleton.batch_size = 10000;
+    OnlineOptions::singleton.batch_size = 20000;
 
     // protocol setup (domain, MAC key if needed etc)
     BinaryProtocolSetup<T> setup(P);
