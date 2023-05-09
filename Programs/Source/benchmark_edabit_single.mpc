@@ -1,0 +1,5 @@
+strict = True
+n_edabits = 200000
+
+for i in range(n_edabits):
+    sint.get_edabit(64, strict)[0].store_in_mem(regint(0))
