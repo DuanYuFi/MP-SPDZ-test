@@ -1,6 +1,8 @@
 program.use_edabit(True)
 
 import numpy as np
+import jax
+from jax import random
 
 def grad_loss_fn(param, x, y):
     N = len(x)
@@ -20,13 +22,13 @@ def fit(params, grads, learning_rate):
 sfix.set_precision(18, 43)
 cfix.set_precision(18, 43)
 
-PRNGKey = np.random.RandomState(0)
+key = random.PRNGKey(0)
 
 n_pts = 10
 n_epochs = 200
 learning_rate = 0.01
 
-X = PRNGKey.uniform(size=(n_pts, ), low=0, high=10)
+X = random.uniform(key, (n_pts,), minval=0, maxval=10)
 a_true = 2.5
 b_true = 5
 Y = a_true * X + b_true
@@ -36,8 +38,8 @@ y = Array(n_pts, sfix)
 
 
 for i in range(n_pts):
-    x[i] = sfix(X[i])
-    y[i] = sfix(Y[i])
+    x[i] = sfix(float(X[i]))
+    y[i] = sfix(float(Y[i]))
 
 params = [sfix(0.0), sfix(0.0)]
 
