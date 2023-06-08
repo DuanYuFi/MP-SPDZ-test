@@ -1,0 +1,51 @@
+program.use_edabit(True)
+
+import numpy as np
+
+def grad_loss_fn(param, x, y):
+    N = len(x)
+    b_grad = sfix(0.0)
+    w_grad = sfix(0.0)
+
+    for i in range(N):
+        b_grad -= (2 / N) * (y[i] - param[0] * x[i] - params[1])
+        w_grad -= (2 / N) * (y[i] - param[0] * x[i] - params[1]) * x[i]
+    
+    return [w_grad, b_grad]
+
+def fit(params, grads, learning_rate):
+    return [params[0] - learning_rate * grads[0], 
+            params[1] - learning_rate * grads[1]]
+
+sfix.set_precision(18, 43)
+cfix.set_precision(18, 43)
+
+PRNGKey = np.random.RandomState(0)
+
+n_pts = 10
+n_epochs = 200
+learning_rate = 0.01
+
+X = PRNGKey.uniform(size=(n_pts, ), low=0, high=10)
+a_true = 2.5
+b_true = 5
+Y = a_true * X + b_true
+
+x = Array(n_pts, sfix)
+y = Array(n_pts, sfix)
+
+
+for i in range(n_pts):
+    x[i] = sfix(X[i])
+    y[i] = sfix(Y[i])
+
+params = [sfix(0.0), sfix(0.0)]
+
+for epoch in range(n_epochs):
+    grads = grad_loss_fn(params, x, y)
+    params = fit(
+        params, grads, learning_rate
+    )
+
+data = reveal(params[0]), reveal(params[1])
+print_ln("%s, %s", data[0], data[1])
